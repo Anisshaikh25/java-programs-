@@ -1,0 +1,41 @@
+You have been given two integer arrays/list(ARR1 and ARR2) of size N and M, respectively. 
+You need to print their intersection; An intersection for this problem can be defined when 
+both the arrays/lists contain a particular value or to put it in other words, 
+when there is a common value that exists in both the arrays/lists
+
+#it can be simply coded using arraylist<Integer>, but because of time limit exceeding we have to use hashmap for this program..
+
+constraints:
+1 <= t <= 10^2
+0 <= N <= 10^4
+0 <= M <= 10^4
+
+
+import java.util.*;
+
+public class Solution {
+
+    public static void intersection(int[] arr1, int[] arr2) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : arr1) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for (int num : arr2) {
+            if (map.containsKey(num) && map.get(num) > 0) {
+                result.add(num); 
+                map.put(num, map.get(num) - 1); 
+            }
+        }
+
+        Collections.sort(result);
+
+        for (int num : result) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
