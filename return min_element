@@ -1,0 +1,23 @@
+# in above all the programs only logic is commited..
+
+
+
+
+import java.util.Scanner;
+public class Solution {
+
+    public static int minimum_element(int[] arr){
+        int min=arr[0];
+
+        for(int n:arr)
+        {
+            if(n<min)
+            {
+                min=n;
+            }
+        }
+        return min;
+		
+    }
+     
+}
