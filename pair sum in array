@@ -1,0 +1,53 @@
+# for this code we have two methods the 1 one is using 2 pointer left and right which will work like an quick sort 
+if left and right pointers index mathes 
+# then count and left will increment and right pointer will decremrnts 
+# And the 2 one is simply using 2 for loops and mathcing the sum with num
+
+
+import java.util.*;
+public class Solution {	
+
+	public static int pairSum(int[] arr, int num) {
+		//Your code goes here
+        // Arrays.sort(arr);
+   
+		// int left=0;
+		// int right=arr.length-1;
+
+		// int count=0;
+		// while(left<right)
+		// {
+		// 	int sum=arr[left]+arr[right];
+
+		// 	if(sum==num)
+		// 	{
+		// 		count++;
+		// 		left++;
+		// 		right--;
+		// 	}
+
+		// 	else if(sum<num)
+		// 	{
+		// 		left++;
+		// 	}
+		// 	else{
+		// 		right--;
+		// 	}
+		// }
+		// return count;
+
+		  int count = 0;
+
+        // Iterate through all pairs
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] + arr[j] == num) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    
+	}
+}
