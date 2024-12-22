@@ -1,0 +1,36 @@
+#To sort an array that contains only 0s and 1s in a single scan and without using extra space,
+#we can use a two-pointer approach. Here's how it works:
+
+import java.util.*;
+public class Solution {  
+
+    public static void sortZeroesAndOne(int[] arr) {
+    	//Your code goes here
+       // Arrays.sort(arr);
+       
+
+       int left=0;
+       int right=arr.length-1;
+
+       while(left<right)
+       {
+           if(arr[left]==1 && arr[right]==0)
+           {
+               int temp=arr[left];
+               arr[left]=arr[right];
+               arr[right]=temp;
+           }
+
+           if(arr[left]==0)
+           {
+               left++;
+           }
+
+           if(arr[right]==1)
+           {
+               right--;
+           }
+       }
+
+    }
+}
