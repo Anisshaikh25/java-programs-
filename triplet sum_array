@@ -44,7 +44,7 @@ public class Solution {
         System.out.println("Number of triplets with sum " + num + ": " + result);
     }
 }
-------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
 
 public class Solution {
@@ -74,3 +74,49 @@ public class Solution {
     }
 }
 
+-------------------------------------------------------------------------------------------------------------------------------
+
+# to avoid duplicates this one code is useful where inner 2 while loop will specifically check for duplicates value
+form left to right and right to left and two pntrs will count this.
+
+import java.util.Arrays;
+
+public class Solution {	
+
+    public static int tripletSum(int[] arr, int num) {
+        int count = 0;
+        // Sort the array
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length - 2; i++) {
+        int left = i + 1;
+        int right = arr.length - 1;
+            while (left < right) {
+                long sum = (long) arr[i] + arr[left] + arr[right];
+                  if (sum == num) { 
+                    if (arr[left] == arr[right]) { 
+                        count += (right - left + 1) * (right - left) / 2;
+                        break;
+                    } else { 
+                        int cnt1 = 1, cnt2 = 1;
+                        while (left + 1 < right && arr[left] == arr[left + 1]) {
+                            cnt1++;
+                            left++;
+                        }
+                        while (right - 1 > left && arr[right] == arr[right - 1]) {
+                            cnt2++;
+                            right--;
+                        }
+                        count += cnt1 * cnt2;
+                        left++;
+                        right--;
+                    }
+                } else if (sum > num) { 
+                    right--; 
+                } else { 
+                    left++; 
+                }
+            }
+        }
+        return count;
+	}
+}
