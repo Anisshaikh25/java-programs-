@@ -1,0 +1,21 @@
+#Given a string S, compute recursively a new string where identical chars that are adjacent
+#in the original string are separated from each other by a "*".
+
+public class solution {
+
+    // Return the updated string
+    public static String addStars(String s) {
+        // Base case: If the string has only one character or is empty, return it as is
+        if (s.length() <= 1) {
+            return s;
+        }
+
+        // Recursive case:
+        if (s.charAt(0) == s.charAt(1)) {
+            // Add "*" between the first character and the result of the recursive call
+            return s.charAt(0) + "*" + addStars(s.substring(1));
+        } else {
+            return s.charAt(0) + addStars(s.substring(1));
+        }
+    }
+}
