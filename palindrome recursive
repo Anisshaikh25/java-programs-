@@ -1,0 +1,30 @@
+#Determine if a given string ‘S’ is a palindrome using recursion. Return a Boolean value of true if it is a palindrome and false if it is not.
+
+#Note: You are not required to print anything, just implement the function. Example:
+#Input: s = "racecar"
+#Output: true
+#Explanation: "racecar" is a palindrome.
+---------------------------------------------------------------
+
+
+public class Solution {
+    public static boolean isPalindrome(String str) {
+        // Helper function to perform the recursion
+        return isPalindromeHelper(str, 0, str.length() - 1);
+    }
+
+    private static boolean isPalindromeHelper(String str, int start, int end) {
+        // Base case: If pointers cross or are equal, it's a palindrome
+        if (start >= end) {
+            return true;
+        }
+
+        // Check if the characters at start and end are the same
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call for the next pair of characters
+        return isPalindromeHelper(str, start + 1, end - 1);
+    }
+}
