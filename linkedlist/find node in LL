@@ -1,0 +1,40 @@
+#You have been given a singly linked list of integers. Write a function that returns the index/position of integer data denoted by 'N' (if it exists). 
+Return -1 otherwise.
+Note :
+Assume that the Indexing for the singly linked list always starts from 0.
+
+/****************************************************************
+
+	Following is the class structure of the Node class:
+
+	class Node<T> {
+    	T data;
+    	Node<T> next;
+    
+    	public Node(T data) {
+        	this.data = data;
+    	}
+	}
+
+*****************************************************************/
+
+public class Solution {
+    public static int findNode(Node<Integer> head, int n) {
+        // Initialize the index
+        int index = 0;
+
+        // Traverse the linked list
+        while (head != null) {
+            // If the current node's data matches 'n'
+            if (head.data.equals(n)) {
+                return index; // Return the index
+            }
+            // Move to the next node
+            head = head.next;
+            index++;
+        }
+
+        // If the value 'n' is not found, return -1
+        return -1;
+    }
+}
