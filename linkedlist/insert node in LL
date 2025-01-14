@@ -1,0 +1,65 @@
+#You have been given a singly linked list of integers, an integer value called 'data' and a position with the name 'pos.'
+#Write a function to add a node to the list with the 'data' at the specified position, 'pos.'
+#Note :
+#Assume that the Indexing for the singly linked list always starts from 0.
+#If the position is greater than the length of the singly linked list, you should return the same linked list without any change.
+
+
+
+
+
+/*
+
+	Following is the Node class already written for the Linked List
+
+	class Node<T> {
+    	T data;
+    	Node<T> next;
+    
+    	public Node(T data) {
+        	this.data = data;
+    	}
+	}
+
+*/
+
+public class Solution {
+
+	public static Node<Integer> insert(Node<Integer> head, int pos, int data){
+		//Your code goes here
+		Node<Integer> nodetobeinserted=new Node<Integer>(data);
+		if(pos==0)
+		{
+			nodetobeinserted.next=head;
+			head=nodetobeinserted;
+			return nodetobeinserted;
+		}
+		else{
+			int count=0;
+			Node<Integer> prev=head;
+			while(count<pos-1 && prev!=null)
+			{
+				count++;
+				prev=prev.next;
+
+			}
+			if(prev!=null)
+			{
+				nodetobeinserted.next=prev.next;
+				prev.next=nodetobeinserted;
+
+			}
+			return head;
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
