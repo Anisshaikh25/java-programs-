@@ -1,0 +1,45 @@
+#Given a singly linked list of integers and an integer n, find and return the index for the first occurrence of 'n' in the linked list. -1 otherwise.
+Follow a recursive approach to solve this.
+Note :
+Assume that the Indexing for the linked list always starts from 0.
+
+/*
+
+    Following is the Node class already written for the Linked List
+
+    class Node<T> {
+        T data;
+        Node<T> next;
+    
+        public Node(T data) {
+            this.data = data;
+        }
+    }
+
+*/
+
+public class Solution {
+
+    public static int findNodeRec(Node<Integer> head, int n) {
+        // Base case: If the list is empty, return -1
+        if (head == null) {
+            return -1;
+        }
+
+        // If the current node's data matches n, return 0
+        if (head.data.equals(n)) {
+            return 0;
+        }
+
+        // Recursive call to check the rest of the list
+        int smallIndex = findNodeRec(head.next, n);
+
+        // If n is found in the rest of the list, add 1 to the index
+        if (smallIndex != -1) {
+            return smallIndex + 1;
+        }
+
+        // If n is not found in the rest of the list, return -1
+        return -1;
+    }
+}
