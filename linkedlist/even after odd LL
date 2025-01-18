@@ -1,0 +1,64 @@
+#For a given singly linked list of integers, arrange the nodes such that all the even number nodes are placed after the all odd number nodes.
+The relative order of the odd and even terms should remain unchanged.
+Note :
+1. No need to print the linked list, it has already been taken care. Only return the new head to the list.
+2. Don't create a new linked list.
+3.  Just change the data, instead rearrange the provided list.
+*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+public class Solution {
+
+    public static Node<Integer> evenAfterOdd(Node<Integer> head) {
+        // Base case: if the list is empty or has only one element, return as is
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Initialize pointers for odd and even sublists
+        Node<Integer> oddHead = null, oddTail = null;
+        Node<Integer> evenHead = null, evenTail = null;
+
+        Node<Integer> current = head;
+
+        // Traverse the list and separate odd and even nodes
+        while (current != null) {
+            if (current.data % 2 != 0) { // Odd node
+                if (oddHead == null) {
+                    oddHead = current;
+                    oddTail = current;
+                } else {
+                    oddTail.next = current;
+                    oddTail = oddTail.next;
+                }
+            } else { // Even node
+                if (evenHead == null) {
+                    evenHead = current;
+                    evenTail = current;
+                } else {
+                    evenTail.next = current;
+                    evenTail = evenTail.next;
+                }
+            }
+            current = current.next;
+        }
+
+        // If there are no odd nodes, return evenHead
+        if (oddHead == null) {
+            return evenHead;
+        }
+
+        // Link the odd and even sublists
+        oddTail.next = evenHead;
+
+        // Terminate the even list
+        if (evenTail != null) {
+            evenTail.next = null;
+        }
+
+        // Return the head of the rearranged list
+        return oddHead;
+    }
+}
