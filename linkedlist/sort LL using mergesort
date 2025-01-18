@@ -1,0 +1,70 @@
+#Given a singly linked list of integers, sort it using 'Merge Sort.'
+Note :
+No need to print the list, it has already been taken care. Only return the new head to the list
+
+/*
+
+    Following is the Node class already written for the Linked List
+
+    class Node<T> {
+        T data;
+        Node<T> next;
+    
+        public Node(T data) {
+            this.data = data;
+        }
+    }
+
+*/
+
+public class Solution {
+
+    public static Node<Integer> mergeSort(Node<Integer> head) {
+        // Base case: If the list is empty or has only one node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node<Integer> mid = getMiddle(head);
+        Node<Integer> rightHead = mid.next;
+        mid.next = null; 
+
+        Node<Integer> left = mergeSort(head);
+        Node<Integer> right = mergeSort(rightHead);
+
+        return merge(left, right);
+    }
+
+    private static Node<Integer> getMiddle(Node<Integer> head) {
+        Node<Integer> slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    private static Node<Integer> merge(Node<Integer> list1, Node<Integer> list2) {
+        Node<Integer> dummy = new Node<>(0);
+        Node<Integer> tail = dummy;
+
+        while (list1 != null && list2 != null) {
+            if (list1.data <= list2.data) {
+                tail.next = list1;
+                list1 = list1.next;
+            } else {
+                tail.next = list2;
+                list2 = list2.next;
+            }
+            tail = tail.next;
+        }
+
+        if (list1 != null) {
+            tail.next = list1;
+        } else if (list2 != null) {
+            tail.next = list2;
+        }
+
+        return dummy.next;
+    }
+}
