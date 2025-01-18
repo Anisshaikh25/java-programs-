@@ -1,0 +1,43 @@
+#You have been given a singly linked list of integers along with two integers, 'M,' and 'N.' Traverse the linked
+list such that you retain the 'M' nodes, then delete the next 'N' nodes. Continue the same until the end of the linked list. Indexing starts from 1.
+To put it in other words, in the given linked list, you need to delete N nodes after every M nodes.
+Note :
+No need to print the list, it has already been taken care. Only return the new head to the list. You can return null in case where all nodes will be deleted.
+
+
+
+public class Solution {
+
+    public static Node<Integer> skipMdeleteN(Node<Integer> head, int M, int N) {
+        // Base case: If head is null or M is 0, return null
+        if (head == null || M == 0) {
+            return null;
+        }
+
+        Node<Integer> current = head;
+
+        while (current != null) {
+            // Retain M nodes
+            for (int i = 1; i < M && current != null; i++) {
+                current = current.next;
+            }
+
+            // If we reached the end of the list, break
+            if (current == null) {
+                break;
+            }
+
+            // Delete the next N nodes
+            Node<Integer> temp = current.next;
+            for (int i = 0; i < N && temp != null; i++) {
+                temp = temp.next;
+            }
+
+            // Connect the retained list to the remaining nodes
+            current.next = temp;
+            current = temp;
+        }
+
+        return head;
+    }
+}
