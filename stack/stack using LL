@@ -1,0 +1,87 @@
+#Problem statement
+Implement a Stack Data Structure specifically to store integer data using a Singly Linked List.
+The data members should be private.
+You need to implement the following public functions :
+1. Constructor:
+It initialises the data members as required.
+2. push(data) :
+This function should take one argument of type integer. It pushes the element into the stack and returns nothing.
+3. pop() :
+It pops the element from the top of the stack and in turn, returns the element being popped or deleted. In case the stack is empty, it returns -1.
+4. top :
+It returns the element being kept at the top of the stack. In case the stack is empty, it returns -1.
+5. size() :
+It returns the size of the stack at any given instance of time.
+6. isEmpty() :
+It returns a boolean value indicating whether the stack is empty or not.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*
+    Following is the structure of the node class for a Singly Linked List
+
+    class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+
+    }
+
+*/
+
+public class Stack {
+
+    // Data members
+    private Node top; // Points to the top of the stack
+    private int size; // Tracks the size of the stack
+
+    // Constructor
+    public Stack() {
+        this.top = null;
+        this.size = 0;
+    }
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+    // Returns the size of the stack
+    public int getSize() {
+        return size;
+    }
+
+    // Checks if the stack is empty
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    // Pushes an element onto the stack
+    public void push(int element) {
+        Node newNode = new Node(element);
+        newNode.next = top;
+        top = newNode;
+        size++;
+    }
+
+    // Pops the top element from the stack and returns it
+    public int pop() {
+        if (isEmpty()) {
+            return -1; // Stack is empty
+        }
+        int poppedData = top.data;
+        top = top.next;
+        size--;
+        return poppedData;
+    }
+
+    // Returns the top element without removing it
+    public int top() {
+        if (isEmpty()) {
+            return -1; // Stack is empty
+        }
+        return top.data;
+    }
+}
