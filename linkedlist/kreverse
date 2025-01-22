@@ -1,0 +1,42 @@
+#Given a singly linked list of integers, reverse the nodes of the linked list 'k' at a time and return its modified list.
+ 'k' is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of 'k,'
+then left-out nodes, in the end, should be reversed as well.
+
+Example :
+Given this linked list: 1 -> 2 -> 3 -> 4 -> 5
+For k = 2, you should return: 2 -> 1 -> 4 -> 3 -> 5
+For k = 3, you should return: 3 -> 2 -> 1 -> 5 -> 4
+
+-----------------------------------------------------------------------------------------------------------
+public class Solution {
+
+    public static Node<Integer> kReverse(Node<Integer> head, int k) {
+        // If k is 0 or the head is null, return the list as is
+        if (head == null || k <= 0) {
+            return head;
+        }
+
+        Node<Integer> current = head;
+        Node<Integer> prev = null;
+        Node<Integer> next = null;
+
+        int count = 0;
+
+        // Reverse the first 'k' nodes of the linked list
+        while (current != null && count < k) {
+            next = current.next; // Store the next node
+            current.next = prev; // Reverse the current node's pointer
+            prev = current; // Move prev to the current node
+            current = next; // Move current to the next node
+            count++;
+        }
+
+        // If there are nodes left in the list, recursively process the rest
+        if (next != null) {
+            head.next = kReverse(next, k);
+        }
+
+        // Return the new head after reversal
+        return prev;
+    }
+}
