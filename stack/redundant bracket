@@ -1,0 +1,65 @@
+#For a given expression in the form of a string, find if there exist any redundant brackets or not. It is given that the 
+expression contains only rounded brackets or parenthesis and the input expression will always be balanced.
+A pair of the bracket is said to be redundant when a sub-expression is surrounded by unnecessary or needless brackets.
+
+Example:
+Expression: (a+b)+c
+Since there are no needless brackets, hence, the output must be 'false'.
+Expression: ((a+b))
+The expression can be reduced to (a+b). Hence the expression has redundant brackets and the output will be 'true'.
+Note:
+You will not get a partial score for this problem. You will get marks only if all the test cases are passed.
+Return "false" if no brackets are present in the input. 
+public class Solution {
+
+	public static boolean checkRedundantBrackets(String expression) {
+		//Your code goes here
+	}
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.Stack;
+
+public class Solution {
+
+    public static boolean checkRedundantBrackets(String expression) {
+        // Stack to keep track of characters in the expression
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < expression.length(); i++) {
+            char currentChar = expression.charAt(i);
+
+            // If the current character is a closing bracket
+            if (currentChar == ')') {
+                // Flag to check if there is any meaningful content inside the brackets
+                boolean hasOperator = false;
+
+                // Pop elements until we find the opening bracket
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    char top = stack.pop();
+                    // Check if there's an operator inside the brackets
+                    if (top == '+' || top == '-' || top == '*' || top == '/') {
+                        hasOperator = true;
+                    }
+                }
+
+                // Pop the opening bracket
+                if (!stack.isEmpty() && stack.peek() == '(') {
+                    stack.pop();
+                }
+
+                // If no operator was found, the brackets are redundant
+                if (!hasOperator) {
+                    return true;
+                }
+            } else {
+                // Push other characters onto the stack
+                stack.push(currentChar);
+            }
+        }
+
+        // If we reach here, no redundant brackets were found
+        return false;
+    }
+}
