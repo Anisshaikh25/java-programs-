@@ -1,0 +1,38 @@
+#Problem statement
+Given a generic tree and an integer n. Find and return the node with next larger element in the Tree i.e. find a node with value just greater than n.
+Return NULL if no node is present with value greater than n.
+
+--------------------------------------------------------------------------------------------
+
+
+
+public class Solution {
+
+    public static TreeNode<Integer> findNextLargerNode(TreeNode<Integer> root, int n) {
+        // Base case: if the root is null, return null
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode<Integer> nextLargerNode = null;
+
+        // Check the current node's data
+        if (root.data > n) {
+            nextLargerNode = root;
+        }
+
+        // Recursively check in the children
+        for (TreeNode<Integer> child : root.children) {
+            TreeNode<Integer> childNextLargerNode = findNextLargerNode(child, n);
+
+            // Update the next larger node if the child's value is closer to `n`
+            if (childNextLargerNode != null) {
+                if (nextLargerNode == null || childNextLargerNode.data < nextLargerNode.data) {
+                    nextLargerNode = childNextLargerNode;
+                }
+            }
+        }
+
+        return nextLargerNode;
+    }
+}
