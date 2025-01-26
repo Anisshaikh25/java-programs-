@@ -1,0 +1,59 @@
+#Given a generic tree, print the input tree in level wise order. That is, print the elements at same level in one line (separated by space). 
+Print different levels in different lines.
+
+The output for the above tree should be 
+10
+20 30 40
+40 50
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+import java.util.*;
+
+
+/*	TreeNode structure 
+ * 
+ * class TreeNode<T> {
+		T data;
+		ArrayList<TreeNode<T>> children;
+
+		TreeNode(T data){
+			this.data = data;
+			children = new ArrayList<TreeNode<T>>();
+		}
+	}*/
+	
+	
+	
+
+
+public class Solution {
+
+    public static void printLevelWise(TreeNode<Integer> root) {
+        if (root == null) {
+            return;
+        }
+
+        // Queue for level-order traversal
+        Queue<TreeNode<Integer>> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size(); // Number of nodes at the current level
+
+            // Process all nodes at the current level
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode<Integer> currentNode = queue.poll();
+                System.out.print(currentNode.data + " "); // Print the data
+
+                // Enqueue all children of the current node
+                for (TreeNode<Integer> child : currentNode.children) {
+                    queue.add(child);
+                }
+            }
+            System.out.println(); // Move to the next line for the next level
+        }
+    }
+}
+
